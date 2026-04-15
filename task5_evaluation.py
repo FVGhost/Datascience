@@ -3,12 +3,12 @@
 # Dataset : COPD GOLD 230 Patients (Kaggle)
 # Task    : 5 — Evaluation, Benchmarking, Visualisation & Ethics
 #
-# CODE QUALITY PRINCIPLES:
-#   • Pipelines    → maintainability & no data leakage
-#   • Functions    → reusability (DRY principle)
-#   • Constants    → updatability (one place to change)
-#   • Docstrings   → readability for collaborators
-#   • RANDOM_STATE → reproducibility of all results
+# CODE steps to work:
+#   • Pipelines    → can be maintained  & no data leakage
+#   • Functions    → able to be reused  (DRY principle)
+#   • Constants    → make it frendly and updateable (one place to change)
+#   • Docstrings   → making it readable  for the  collaborators
+#   • RANDOM_STATE → reuse of all results
 # =============================================================================
 
 import os
@@ -37,10 +37,6 @@ from sklearn.metrics import (
 )
 from imblearn.over_sampling import SMOTE
 
-# =============================================================================
-# CONFIGURATION
-# =============================================================================
-
 CLEANED_DATA  = "outputs/copd_cleaned.csv"
 TARGET_COL    = "COPD GOLD"
 TEST_SIZE     = 0.20
@@ -52,7 +48,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # =============================================================================
 # LOAD DATA & PREPARE SPLIT
-# Same RANDOM_STATE + stratify = identical split to Tasks 3 & 4
+# Same RANDOM_STATE which is split to Tasks 3 & 4
 # =============================================================================
 
 df = pd.read_csv(CLEANED_DATA)
@@ -71,9 +67,6 @@ X_train_bal, y_train_bal = smote.fit_resample(X_train, y_train)
 
 cv = StratifiedKFold(n_splits=N_FOLDS, shuffle=True, random_state=RANDOM_STATE)
 
-# =============================================================================
-# HELPER FUNCTIONS
-# =============================================================================
 
 def confidence_interval(scores, z=1.96):
     """
@@ -147,7 +140,7 @@ def evaluate_model(name, pipeline, X_tr, y_tr, X_te, y_te, cv_strategy):
 
 # =============================================================================
 # RE-TRAIN ALL MODELS
-# Task 5 re-trains everything so it can produce unified evaluation outputs.
+# Task 5 refresh everything so it can produce  accurate evaluation outputs.
 # =============================================================================
 
 print("Re-training all models for combined evaluation...")
@@ -235,8 +228,6 @@ comparison_df.to_csv(f"{OUTPUT_DIR}/benchmarking_results.csv", index=False)
 print(f"\nBenchmarking table saved → {OUTPUT_DIR}/benchmarking_results.csv")
 
 # ── 5.2 Tuning improvement summary ───────────────────────────────────────────
-# Explicitly quantifies the gain from hyperparameter tuning vs default RF.
-# Directly addresses the rubric requirement for benchmarking analysis.
 print("\n── Tuning Improvement Summary ──")
 rf_default_f1  = float(comparison_df.loc[comparison_df["Model"] == "Random Forest (Default)", "Test F1"].values[0])
 rf_tuned_f1    = float(comparison_df.loc[comparison_df["Model"] == "Random Forest (Tuned)",   "Test F1"].values[0])
@@ -338,7 +329,6 @@ plt.savefig(f"{OUTPUT_DIR}/model_comparison_chart.png", dpi=150, bbox_inches="ti
 plt.close()
 print(f"Comparison chart saved → {OUTPUT_DIR}/model_comparison_chart.png")
 
-# ── 5.5 ROC curves — tuned Random Forest (one-vs-rest) ───────────────────────
 y_test_bin = label_binarize(y_test, classes=sorted(y.unique()))
 colors_roc = ["#E53935", "#1E88E5", "#43A047", "#FB8C00"]
 
@@ -362,7 +352,7 @@ plt.savefig(f"{OUTPUT_DIR}/roc_curves.png", dpi=150, bbox_inches="tight")
 plt.close()
 print(f"ROC curves saved → {OUTPUT_DIR}/roc_curves.png")
 
-# ── 5.6 Feature importances with std dev error bars ──────────────────────────
+# ── 5.5 Feature importances with error bars ──────────────────────────
 rf_clf      = rf_grid.best_estimator_.named_steps["clf"]
 importances = pd.Series(rf_clf.feature_importances_, index=FEATURES)
 std_imp     = np.std([t.feature_importances_ for t in rf_clf.estimators_], axis=0)
@@ -385,10 +375,7 @@ plt.savefig(f"{OUTPUT_DIR}/feature_importances.png", dpi=150, bbox_inches="tight
 plt.close()
 print(f"Feature importances saved → {OUTPUT_DIR}/feature_importances.png")
 
-# ── 5.7 Learning curve — tuned Random Forest ─────────────────────────────────
-# Plots training vs CV validation F1 as training set size grows.
-# Diagnoses whether the model is overfitting (large gap between curves)
-# or underfitting (both curves plateau at low scores).
+
 print("\nGenerating learning curve...")
 train_sizes, train_scores, val_scores = learning_curve(
     rf_grid.best_estimator_,
@@ -428,7 +415,7 @@ plt.savefig(f"{OUTPUT_DIR}/learning_curve.png", dpi=150, bbox_inches="tight")
 plt.close()
 print(f"Learning curve saved → {OUTPUT_DIR}/learning_curve.png")
 
-# ── 5.8 Per-class F1 heatmap (all models) ────────────────────────────────────
+# ── 5.7 Per-class F1 heatmap (all models) ────────────────────────────────────
 per_class_f1 = {}
 for result in all_results:
     report = classification_report(
@@ -452,7 +439,7 @@ plt.savefig(f"{OUTPUT_DIR}/per_class_f1_heatmap.png", dpi=150, bbox_inches="tigh
 plt.close()
 print(f"Per-class F1 heatmap saved → {OUTPUT_DIR}/per_class_f1_heatmap.png")
 
-# ── 5.9 Final summary ─────────────────────────────────────────────────────────
+# ── 5.8 Final summary ─────────────────────────────────────────────────────────
 best_model = comparison_df.loc[
     comparison_df["Test F1"].astype(float).idxmax(), "Model"
 ]
