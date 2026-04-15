@@ -152,11 +152,6 @@ print("TASK 4 — RANDOM FOREST + HYPERPARAMETER TUNING")
 print("=" * 65)
 
 # ── 4a. Random Forest — default (pre-tuning baseline) ────────────────────────
-# Justification: Random Forest is a bagging ensemble of decorrelated decision
-# trees. It reduces variance compared to a single Decision Tree, handles
-# mixed feature types naturally, and consistently outperforms single
-# classifiers on medical classification tasks [4].
-# class_weight='balanced' corrects for GOLD stage class imbalance.
 rf_base = Pipeline([
     ("scaler", StandardScaler()),
     ("clf", RandomForestClassifier(
@@ -169,19 +164,6 @@ rf_base_res = evaluate_model("Random Forest (Default)",
                              X_test, y_test, cv)
 
 # ── 4b. GridSearchCV hyperparameter tuning ────────────────────────────────────
-# Exhaustive search over the most impactful Random Forest hyperparameters:
-#
-#   n_estimators     — number of trees. More trees reduce variance but
-#                      have diminishing returns beyond ~300.
-#   max_depth        — maximum tree depth. None = fully grown (may overfit).
-#                      Limiting depth regularises the model.
-#   min_samples_split— minimum samples required to split a node.
-#                      Higher values create smoother decision boundaries.
-#   max_features     — number of features considered at each split.
-#                      'sqrt' is the standard recommendation for classifiers.
-#
-# Scoring: f1_weighted optimises for F1 across all GOLD stages,
-# accounting for class imbalance rather than just majority class accuracy.
 
 print("\nRunning GridSearchCV — please wait...")
 
@@ -202,10 +184,10 @@ rf_grid = GridSearchCV(
     ]),
     param_grid=param_grid,
     cv=cv,
-    scoring="f1_weighted",  # imbalance-aware scoring metric
-    n_jobs=-1,              # use all CPU cores for speed
+    scoring="f1_weighted",  
+    n_jobs=-1,             
     verbose=1,
-    refit=True              # refit best model on full training set
+    refit=True             
 )
 
 rf_grid.fit(X_train_bal, y_train_bal)
@@ -249,11 +231,6 @@ if rf_tuned_res["y_prob"] is not None:
     np.save(f"{OUTPUT_DIR}/rf_tuned_proba.npy", rf_tuned_res["y_prob"])
 
 # ── Learning curve: diagnose overfitting vs underfitting ─────────────────────
-# A learning curve plots training and CV validation accuracy as a function
-# of training set size. It reveals whether the model suffers from:
-#   - High bias (underfitting): both curves plateau at low accuracy
-#   - High variance (overfitting): large gap between train and CV curves
-# This is a standard experiment design technique cited in the rubric.
 from sklearn.model_selection import learning_curve
 
 print("\nGenerating learning curve for tuned Random Forest...")
