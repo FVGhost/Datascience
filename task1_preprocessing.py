@@ -26,6 +26,7 @@ DATA_PATH    = "230PatientsCOPD.xlsx"   # main dataset
 CAT_PATH     = "PatientCategorical.csv" # categorical supplement
 TARGET_COL   = "COPD GOLD"             # classification target
 OUTPUT_DIR   = "outputs"               # all outputs saved here
+RANDOM_STATE = 0                    # ensures reproducible results
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
