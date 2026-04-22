@@ -1,7 +1,7 @@
 # =============================================================================
 # COM747 2025-2026 — Data Science & Machine Learning Coursework
-# Dataset : COPD GOLD 230 Patients (Kaggle)
-# Task    : 2 — Exploratory Data Analysis (EDA) & Statistics
+# Dataset   : COPD GOLD 230 Patients (Kaggle)
+# Task 2    : Exploratory Data Analysis (EDA) & Statistics
 # =============================================================================
 
 import os
