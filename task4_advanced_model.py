@@ -1,7 +1,7 @@
 # =============================================================================
 # COM747 2025-2026 — Data Science & Machine Learning Coursework
-# Dataset : COPD GOLD 230 Patients (Kaggle)
-# Task    : 4 — Advanced Model + Tuning
+# Dataset  : COPD GOLD 230 Patients (Kaggle)
+# Task 4   :  Advanced Model + Tuning
 # =============================================================================
 
 import os
