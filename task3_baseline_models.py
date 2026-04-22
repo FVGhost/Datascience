@@ -1,8 +1,8 @@
 # =============================================================================
 # COM747 2025-2026 — Data Science & Machine Learning Coursework
-# Dataset : COPD GOLD 230 Patients (Kaggle)
-# Task    : 3 — Baseline ML Classifiers
-# Models  : Logistic Regression | Decision Tree | K-Nearest Neighbours
+# Dataset  : COPD GOLD 230 Patients (Kaggle)
+# Task 3   : Baseline ML Classifiers
+# Models   : Logistic Regression | Decision Tree | K-Nearest Neighbours
 # =============================================================================
 
 import os
