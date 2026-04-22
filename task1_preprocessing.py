@@ -3,14 +3,14 @@
 # Dataset : COPD GOLD 230 Patients (Kaggle)
 # Project : Classification of COPD Severity using GOLD Staging
 # Task    : 1 — Data Loading, Cleaning & Preprocessing
-================================================
-Member 1 : Naresh Balaji          — B01047484
-Member 2 : Osarobo Destiny        — B01045758
-Member 3 : Muhammed Mohsin        — B01028095
-Member 4 : Aniket Yuvraj Chavan   — B01037393
-Member 5 : Arun Reddy Bandi       — B01041589
-================================================
-    
+=============================================================================
+Member 1 : Naresh Balaji                  — B01047484
+Member 2 : Osarobo Destiny Edomwande      — B01045758
+Member 3 : Muhammed Mohsin                — B01028095
+Member 4 : Aniket Yuvraj Chavan           — B01037393
+Member 5 : Arun Reddy Bandi               — B01041589
+=============================================================================
+
 # CODE QUALITY PRINCIPLES:
 #   • Constants    → updatability (one place to change)
 #   • Comments     → readability for collaborators
