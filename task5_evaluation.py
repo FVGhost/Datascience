@@ -1,7 +1,7 @@
 # =============================================================================
 # COM747 2025-2026 — Data Science & Machine Learning Coursework
-# Dataset : COPD GOLD 230 Patients (Kaggle)
-# Task    : 5 — Evaluation, Benchmarking, Visualisation & Ethics
+# Dataset  : COPD GOLD 230 Patients (Kaggle)
+# Task 5   : Evaluation, Benchmarking, Visualisation & Ethics
 #
 # CODE steps to work:
 #   • Pipelines    → can be maintained  & no data leakage
