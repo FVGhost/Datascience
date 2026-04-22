@@ -4,14 +4,11 @@
 # Project : Classification of COPD Severity using GOLD Staging
 # Task    : 1 — Data Loading, Cleaning & Preprocessing
 ================================================
-
-
 Member 1 : Naresh Balaji          — B01047484
 Member 2 : Osarobo Destiny        — B01045758
 Member 3 : Muhammed Mohsin        — B01028095
 Member 4 : Aniket Yuvraj Chavan   — B01037393
 Member 5 : Arun Reddy Bandi       — B01041589
-Leader   : Naresh Balaji          — B01047484
 ================================================
     
 # CODE QUALITY PRINCIPLES:
