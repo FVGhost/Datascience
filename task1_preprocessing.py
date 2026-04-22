@@ -2,7 +2,7 @@
 # COM747 2025-2026 — Data Science & Machine Learning Coursework
 # Dataset : COPD GOLD 230 Patients (Kaggle)
 # Project : Classification of COPD Severity using GOLD Staging
-# Task    : 1 — Data Loading, Cleaning & Preprocessing
+# Task 1   : Data Loading, Cleaning & Preprocessing
 =============================================================================
 Member 1 : Naresh Balaji                  — B01047484
 Member 2 : Osarobo Destiny Edomwande      — B01045758
